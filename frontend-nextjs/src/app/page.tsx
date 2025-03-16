@@ -111,7 +111,7 @@ export default function ROICalculator() {
   }
 
   return (
-    <div className="flex min-h-screen bg-background">
+    <div className="flex bg-background max-h-max">
       {/* Sidebar for desktop */}
       <aside className="hidden md:flex w-64 flex-col border-r bg-background">
         <div className="p-4 border-b flex justify-between items-center">
@@ -170,18 +170,6 @@ export default function ROICalculator() {
                 </div>
               ))}
 
-              <Separator className="my-2" />
-              <h3 className="text-sm font-medium mb-2">Older Conversations</h3>
-
-              {[6, 7, 8, 9, 10].map((i) => (
-                <div key={i} className="flex items-start gap-2 p-2 rounded-lg hover:bg-accent cursor-pointer">
-                  <Clock className="h-4 w-4 mt-1 text-muted-foreground" />
-                  <div>
-                    <p className="text-sm font-medium">Project Analysis #{i}</p>
-                    <p className="text-xs text-muted-foreground">{`${i + 10} days ago`}</p>
-                  </div>
-                </div>
-              ))}
             </div>
           </ScrollArea>
         </div>
@@ -857,114 +845,112 @@ export default function ROICalculator() {
           </TabsContent>
           
 
-          <TabsContent value="assistant" className="mt-0">
+            <TabsContent value="assistant" className="mt-0">
             <Card className="h-[calc(100vh-220px)] flex flex-col">
               <CardHeader className="pb-3">
-                <CardTitle className="text-lg flex items-center">
-                  <Bot className="mr-2 h-5 w-5" />
-                  ROI Analysis Assistant
-                </CardTitle>
-                <CardDescription>Ask questions about your project analysis</CardDescription>
+              <CardTitle className="text-lg flex items-center">
+                <Bot className="mr-2 h-5 w-5" />
+                ROI Analysis Assistant
+              </CardTitle>
+              <CardDescription>Ask questions about your project analysis</CardDescription>
               </CardHeader>
               <CardContent className="flex-1 overflow-hidden">
-                <ScrollArea className="h-[calc(100vh-340px)] pr-4">
-                  <div className="space-y-4">
-                    {messages.map((message, index) => (
-                      <div key={index} className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}>
-                        <div
-                          className={`rounded-lg px-4 py-2 max-w-[80%] ${
-                            message.role === "user" ? "bg-primary text-primary-foreground" : "bg-muted"
-                          }`}
-                        >
-                          {message.role === "system" && (
-                            <div className="flex items-center mb-1">
-                              <Avatar className="h-6 w-6 mr-2">
-                                <AvatarImage src="/placeholder.svg?height=32&width=32" />
-                                <AvatarFallback>AI</AvatarFallback>
-                              </Avatar>
-                              <span className="text-xs font-medium">ROI Assistant</span>
-                            </div>
-                          )}
-                          <p className="text-sm">{message.content}</p>
-                        </div>
-                      </div>
-                    ))}
+              <ScrollArea className="h-full pr-4">
+                <div className="space-y-4">
+                {messages.map((message, index) => (
+                  <div key={index} className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}>
+                  <div
+                    className={`rounded-lg px-4 py-2 max-w-[80%] ${
+                    message.role === "user" ? "bg-primary text-primary-foreground" : "bg-muted"
+                    }`}
+                  >
+                    {message.role === "system" && (
+                    <div className="flex items-center mb-1">
+                      <Avatar className="h-6 w-6 mr-2">
+                      <AvatarImage src="/placeholder.svg?height=32&width=32" />
+                      <AvatarFallback>AI</AvatarFallback>
+                      </Avatar>
+                      <span className="text-xs font-medium">ROI Assistant</span>
+                    </div>
+                    )}
+                    <p className="text-sm">{message.content}</p>
                   </div>
-                </ScrollArea>
+                  </div>
+                ))}
+                </div>
+              </ScrollArea>
               </CardContent>
 
-              <div className="px-6 ">
+              <div className="px-6">
               <h3 className="text-lg font-medium mb-3 text-center">Suggested Questions</h3>
               <div className="flex flex-wrap gap-2">
                 <Badge
-                  variant="outline"
-                  className="cursor-pointer hover:bg-primary/10"
-                  onClick={() => handleQuickPrompt("How can I optimize my ROI further?")}
+                variant="outline"
+                className="cursor-pointer hover:bg-primary/10"
+                onClick={() => handleQuickPrompt("How can I optimize my ROI further?")}
                 >
-                  How can I optimize my ROI further?
+                How can I optimize my ROI further?
                 </Badge>
                 <Badge
-                  variant="outline"
-                  className="cursor-pointer hover:bg-primary/10"
-                  onClick={() => handleQuickPrompt("What are the biggest risks in my project?")}
+                variant="outline"
+                className="cursor-pointer hover:bg-primary/10"
+                onClick={() => handleQuickPrompt("What are the biggest risks in my project?")}
                 >
-                  What are the biggest risks in my project?
+                What are the biggest risks in my project?
                 </Badge>
                 <Badge
-                  variant="outline"
-                  className="cursor-pointer hover:bg-primary/10"
-                  onClick={() => handleQuickPrompt("Is my timeline realistic?")}
+                variant="outline"
+                className="cursor-pointer hover:bg-primary/10"
+                onClick={() => handleQuickPrompt("Is my timeline realistic?")}
                 >
-                  Is my timeline realistic?
+                Is my timeline realistic?
                 </Badge>
                 <Badge
-                  variant="outline"
-                  className="cursor-pointer hover:bg-primary/10"
-                  onClick={() => handleQuickPrompt("How does my ROI compare to industry benchmarks?")}
+                variant="outline"
+                className="cursor-pointer hover:bg-primary/10"
+                onClick={() => handleQuickPrompt("How does my ROI compare to industry benchmarks?")}
                 >
-                  How does my ROI compare to industry benchmarks?
+                How does my ROI compare to industry benchmarks?
                 </Badge>
                 <Badge
-                  variant="outline"
-                  className="cursor-pointer hover:bg-primary/10"
-                  onClick={() => handleQuickPrompt("What are the key success factors for this project?")}
+                variant="outline"
+                className="cursor-pointer hover:bg-primary/10"
+                onClick={() => handleQuickPrompt("What are the key success factors for this project?")}
                 >
-                  What are the key success factors for this project?
+                What are the key success factors for this project?
                 </Badge>
                 <Badge
-                  variant="outline"
-                  className="cursor-pointer hover:bg-primary/10"
-                  onClick={() => handleQuickPrompt("How can I improve employee adoption?")}
+                variant="outline"
+                className="cursor-pointer hover:bg-primary/10"
+                onClick={() => handleQuickPrompt("How can I improve employee adoption?")}
                 >
-                  How can I improve employee adoption?
+                How can I improve employee adoption?
                 </Badge>
               </div>
-            </div>
+              </div>
 
               <CardFooter className="pt-0">
-                <form
-                  className="flex w-full items-center space-x-2"
-                  onSubmit={(e) => {
-                    e.preventDefault()
-                    handleSendMessage()
-                  }}
-                >
-                  <Input
-                    placeholder="Ask about your ROI analysis..."
-                    value={inputMessage}
-                    onChange={(e) => setInputMessage(e.target.value)}
-                    className="flex-1"
-                  />
-                  <Button type="submit" size="icon" disabled={!inputMessage.trim()}>
-                    <Send className="h-4 w-4" />
-                    <span className="sr-only">Send</span>
-                  </Button>
-                </form>
+              <form
+                className="flex w-full items-center space-x-2"
+                onSubmit={(e) => {
+                e.preventDefault()
+                handleSendMessage()
+                }}
+              >
+                <Input
+                placeholder="Ask about your ROI analysis..."
+                value={inputMessage}
+                onChange={(e) => setInputMessage(e.target.value)}
+                className="flex-1"
+                />
+                <Button type="submit" size="icon" disabled={!inputMessage.trim()}>
+                <Send className="h-4 w-4" />
+                <span className="sr-only">Send</span>
+                </Button>
+              </form>
               </CardFooter>
             </Card>
-
-      
-          </TabsContent>
+            </TabsContent>
           </Tabs>
         </div>
       </div>
