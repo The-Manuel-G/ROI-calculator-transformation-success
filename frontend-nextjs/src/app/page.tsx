@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Calculator from "./calculator/page"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -282,7 +283,7 @@ export default function ROICalculator() {
           {/* Main tabs for Calculator and Assistant */}
           
           <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-6">
-            <TabsList className="grid w-full grid-cols-2">
+            <TabsList className="grid w-full grid-cols-3">
               <TabsTrigger value="calculator" className="flex items-center gap-2">
                 <BarChart className="h-4 w-4" />
                 ROI Calculator
@@ -290,6 +291,10 @@ export default function ROICalculator() {
               <TabsTrigger value="assistant" className="flex items-center gap-2">
                 <Bot className="h-4 w-4" />
                 AI Assistant
+              </TabsTrigger>
+              <TabsTrigger value="form-ai" className="flex items-center gap-2">
+                <BarChart className="h-4 w-4" />
+                Input Data
               </TabsTrigger>
             </TabsList>
 
@@ -950,6 +955,9 @@ export default function ROICalculator() {
               </form>
               </CardFooter>
             </Card>
+            </TabsContent>
+            <TabsContent value="form-ai" className="mt-0 space-y-6">
+              <Calculator/>
             </TabsContent>
           </Tabs>
         </div>
