@@ -1,0 +1,15 @@
+# Environment variables
+.env
+
+# Python virtual environments
+.venv/
+
+# Azure Functions
+local.settings.json
+*.azurewebjobsstorage
+
+# Blob Storage
+blobstorage/
+
+# OpenAI
+openai/
