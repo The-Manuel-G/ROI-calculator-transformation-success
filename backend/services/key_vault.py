@@ -1,6 +1,9 @@
+from dotenv import load_dotenv
 import os
 from azure.keyvault.secrets import SecretClient
 from azure.identity import DefaultAzureCredential
+
+load_dotenv()
 
 """
 La variable de entorno KEY_VAULT_NAME debe contener el nombre del key vault en Azure.
