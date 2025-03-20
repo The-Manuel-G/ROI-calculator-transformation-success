@@ -1,10 +1,6 @@
 import os
 from openai import AzureOpenAI
-from dotenv import load_dotenv
 from services.key_vault import get_secret
-
-# Cargar variables del archivo .env
-load_dotenv()
 
 # Crear cliente OpenAI para Azure
 client = AzureOpenAI(
