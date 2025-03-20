@@ -1,6 +1,3 @@
-Este es el endpoint al que se enviarán los datos al backend a través de una solicitud POST:
-https://roi-calculator-ezdxh2cjgvg9fvaz.eastus-01.azurewebsites.net/data
-
 Los datos se enviarán en formato JSON, como se especifica en el archivo de ejemplo `schema_roi.json` ubicado en la raíz del proyecto.
 
 El formato del JSON que devuelve se encuentra en `respuesta_roi.json`.
