@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Calculator from "./calculator/page"
+import CalculatorProduction from "@/app/calculatorV2/page"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -283,7 +284,7 @@ export default function ROICalculator() {
           {/* Main tabs for Calculator and Assistant */}
           
           <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-6">
-            <TabsList className="grid w-full grid-cols-3">
+            <TabsList className="grid w-full grid-cols-4">
               <TabsTrigger value="calculator" className="flex items-center gap-2">
                 <BarChart className="h-4 w-4" />
                 ROI Calculator
@@ -295,6 +296,10 @@ export default function ROICalculator() {
               <TabsTrigger value="form-ai" className="flex items-center gap-2">
                 <BarChart className="h-4 w-4" />
                 Input Data
+              </TabsTrigger>
+              <TabsTrigger value="calculator-production" className="flex items-center gap-2">
+                <BarChart className="h-4 w-4" />
+                AI InputData
               </TabsTrigger>
             </TabsList>
 
@@ -958,6 +963,9 @@ export default function ROICalculator() {
             </TabsContent>
             <TabsContent value="form-ai" className="mt-0 space-y-6">
               <Calculator/>
+            </TabsContent>
+            <TabsContent value="calculator-production" className="mt-0 space-y-6">
+              <CalculatorProduction/>
             </TabsContent>
           </Tabs>
         </div>
