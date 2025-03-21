@@ -1,5 +1,5 @@
 "use client"
-
+import ReactMarkdown from "react-markdown";
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -31,8 +31,8 @@ export default function CalculatorProduction() {
     financial_risks: "",
     productivity_savings: "",
     risk_reduction: "",
-  })
-  const { toast } = useToast()
+  });
+  const { toast } = useToast();
 
   const currentTabIndex = TABS.indexOf(activeTab)
   const progress = ((currentTabIndex + 1) / TABS.length) * 100
@@ -42,11 +42,23 @@ export default function CalculatorProduction() {
   }
 
   const handleNext = () => {
-    const nextIndex = currentTabIndex + 1
-    if (nextIndex < TABS.length) {
-      setActiveTab(TABS[nextIndex])
+    const nextIndex = currentTabIndex + 1;
+  
+    // Validar antes de permitir avanzar a "results"
+    if (TABS[nextIndex] === "results" && !isValidFormData()) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Please complete all required fields before viewing the results.",
+      });
+      return;
     }
-  }
+  
+    if (nextIndex < TABS.length) {
+      
+      setActiveTab(TABS[nextIndex]);
+    }
+  };
 
   const handlePrevious = () => {
     const prevIndex = currentTabIndex - 1
@@ -68,6 +80,37 @@ export default function CalculatorProduction() {
       description: "Your calculator data has been saved successfully.",
     })
   }
+
+  const isValidFormData = () => {
+    return (
+      formData.budget &&
+      formData.duration_months &&
+      formData.employees &&
+      formData.management_resources &&
+      formData.training_costs &&
+      formData.communication_costs &&
+      formData.adoption_speed_months &&
+      formData.employee_competence_percent &&
+      formData.utilization_percent &&
+      formData.financial_risks &&
+      formData.productivity_savings &&
+      formData.risk_reduction &&
+      formData.project_info
+    );
+  };
+
+  const handleSubmit = () => {
+    if (!isValidFormData()) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Please fill in all required fields before submitting.",
+      });
+      return;
+    }
+
+    console.log("Form data is valid:", formData);
+  };
 
   return (
     <div className="container mx-auto px-4 max-w-full">
