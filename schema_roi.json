@@ -1,0 +1,15 @@
+{
+    "budget": 1250000,
+    "duration_months": 24,
+    "employees": 320,
+    "management_resources": 85000,
+    "training_costs": 60000,
+    "communication_costs": 28000,
+    "adoption_speed_months": 7,
+    "employee_competence_percent": 88.4,
+    "utilization_percent": 94.1,
+    "financial_risks": 135000,
+    "productivity_savings": 310000,
+    "risk_reduction": 75000,
+    "project_info": "Implementación de un sistema ERP en una empresa manufacturera para optimizar la cadena de suministro, producción y gestión financiera."
+}

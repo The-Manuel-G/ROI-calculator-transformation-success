@@ -1,0 +1,3 @@
+Los datos se enviarán en formato JSON, como se especifica en el archivo de ejemplo `schema_roi.json` ubicado en la raíz del proyecto.
+
+El formato del JSON que devuelve se encuentra en `respuesta_roi.json`.
