@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from services.gpt import get_recommendations
 from services.utils import validate_json
 from services.metrics import calculate_metrics
@@ -22,6 +23,7 @@ El servidor recibe un JSON con los siguientes campos:
 """
 
 app = Flask(__name__)
+CORS(app, resources={r"/data": {"origins": "*"}})
 
 @app.route("/data", methods=["POST"])
 def data():
@@ -51,7 +53,9 @@ def data():
     except ValueError as ve:
         return jsonify({"error": str(ve)}), 400
     except Exception as e:
-        return jsonify({"error": "An unexpected error occurred"}), 500
+        import traceback
+        print(traceback.format_exc())
+        return jsonify({"error": "An unexpected error occurred", "details": str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
