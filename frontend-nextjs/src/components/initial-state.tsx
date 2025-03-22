@@ -13,7 +13,6 @@ interface InitialStateProps {
 }
 
 export function InitialState({ data, updateData }: InitialStateProps) {
-  // Initialize state from props but don't update when props change
   const [formValues, setFormValues] = useState(() => ({
     operationalCosts: data?.operationalCosts || "",
     processingTime: data?.processingTime || "",
@@ -29,7 +28,6 @@ export function InitialState({ data, updateData }: InitialStateProps) {
       [field]: value,
     }
     setFormValues(newValues)
-    // Update parent immediately with the new values
     updateData(newValues)
   }
 

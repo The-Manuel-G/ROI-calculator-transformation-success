@@ -50,14 +50,12 @@ export default function ROICalculator() {
   const [mounted, setMounted] = useState(false)
   const { theme, setTheme } = useTheme()
 
-  // Ensure theme toggle only renders client-side to prevent hydration mismatch
   useEffect(() => {
     setMounted(true)
   }, [])
 
   const handleCalculate = () => {
     setIsCalculating(true)
-    // Simulate calculation time
     setTimeout(() => {
       setIsCalculating(false)
       setShowResults(true)
@@ -67,11 +65,9 @@ export default function ROICalculator() {
   const handleSendMessage = () => {
     if (!inputMessage.trim()) return
 
-    // Add user message
     setMessages([...messages, { role: "user", content: inputMessage }])
     setInputMessage("")
 
-    // Simulate AI response after a short delay
     setTimeout(() => {
       setMessages((prev) => [
         ...prev,
@@ -93,7 +89,6 @@ export default function ROICalculator() {
     setMessages([...messages, { role: "user", content: prompt }])
     setActiveTab("assistant")
 
-    // Simulate AI response after a short delay
     setTimeout(() => {
       let response: string = ""
 
@@ -113,8 +108,7 @@ export default function ROICalculator() {
   }
 
   return (
-    <div className="flex bg-background max-h-max">
-      {/* Sidebar for desktop */}
+    <div className="flex bg-background">
       <aside className="hidden md:flex w-64 flex-col border-r bg-background">
         <div className="p-4 border-b flex justify-between items-center">
           <div>
@@ -177,7 +171,6 @@ export default function ROICalculator() {
         </div>
       </aside>
 
-      {/* Mobile sidebar */}
       <Sheet>
         <SheetTrigger asChild>
           <Button variant="outline" size="icon" className="md:hidden absolute top-4 left-4 z-10">
@@ -229,36 +222,13 @@ export default function ROICalculator() {
           <ScrollArea className="h-[calc(100vh-180px)] px-4">
             <h3 className="text-sm font-medium mb-2">Recent Conversations</h3>
             <div className="space-y-2">
-              {/* {[1, 2, 3, 4, 5].map((i) => (
-                <div key={i} className="flex items-start gap-2 p-2 rounded-lg hover:bg-accent cursor-pointer">
-                  <Clock className="h-4 w-4 mt-1 text-muted-foreground" />
-                  <div>
-                    <p className="text-sm font-medium">Project Analysis #{i}</p>
-                    <p className="text-xs text-muted-foreground">
-                      {i === 1 ? "Just now" : i === 2 ? "2 hours ago" : `${i} days ago`}
-                    </p>
-                  </div>
-                </div>
-              ))} */}
-
               <Separator className="my-2" />
               <h3 className="text-sm font-medium mb-2">Older Conversations</h3>
-{/* 
-              {[6, 7, 8, 9, 10].map((i) => (
-                <div key={i} className="flex items-start gap-2 p-2 rounded-lg hover:bg-accent cursor-pointer">
-                  <Clock className="h-4 w-4 mt-1 text-muted-foreground" />
-                  <div>
-                    <p className="text-sm font-medium">Project Analysis #{i}</p>
-                    <p className="text-xs text-muted-foreground">{`${i + 10} days ago`}</p>
-                  </div>
-                </div>
-              ))} */}
             </div>
           </ScrollArea>
         </SheetContent>
       </Sheet>
 
-      {/* Main content */}
       <div className="flex-1 flex flex-col">
         <div className="container mx-auto py-8 px-4 max-w-full">
           <div className="flex justify-between items-center mb-6">
@@ -281,18 +251,9 @@ export default function ROICalculator() {
             </div>
           </div>
 
-          {/* Main tabs for Calculator and Assistant */}
           
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-6">
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-6" defaultValue="calculator-production">
             <TabsList className="grid w-full grid-cols-1">
-              {/* <TabsTrigger value="assistant" className="flex items-center gap-2">
-                <Bot className="h-4 w-4" />
-                AI Assistant
-              </TabsTrigger> */}
-              {/* <TabsTrigger value="form-ai" className="flex items-center gap-2">
-                <BarChart className="h-4 w-4" />
-                Input Data
-              </TabsTrigger> */}
               <TabsTrigger value="calculator-production" className="flex items-center gap-2">
                 <BarChart className="h-4 w-4" />
                 AI InputData

@@ -13,7 +13,6 @@ interface ProjectIdentificationProps {
 }
 
 export function ProjectIdentification({ data, updateData }: ProjectIdentificationProps) {
-  // Initialize state from props but don't update when props change
   const [formValues, setFormValues] = useState(() => ({
     projectName: data?.projectName || "",
     projectDescription: data?.projectDescription || "",
@@ -26,7 +25,6 @@ export function ProjectIdentification({ data, updateData }: ProjectIdentificatio
       [field]: value,
     }
     setFormValues(newValues)
-    // Update parent immediately with the new values
     updateData(newValues)
   }
 

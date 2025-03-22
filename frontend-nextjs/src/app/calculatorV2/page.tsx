@@ -44,7 +44,6 @@ export default function CalculatorProduction() {
   const handleNext = () => {
     const nextIndex = currentTabIndex + 1;
   
-    // Validar antes de permitir avanzar a "results"
     if (TABS[nextIndex] === "results" && !isValidFormData()) {
       toast({
         variant: "destructive",

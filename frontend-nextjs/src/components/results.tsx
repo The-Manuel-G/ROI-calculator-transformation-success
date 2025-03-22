@@ -36,7 +36,6 @@ export function Results({ formData }: ResultsProps) {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        // Construir el cuerpo de la solicitud basado en formData
         const requestBody = {
           budget: Number(formData.budget),
           duration_months: Number(formData.duration_months),
@@ -55,7 +54,7 @@ export function Results({ formData }: ResultsProps) {
           project_info: formData.project_info,
         };
 
-        console.log("Request Body:", requestBody); // Para depuración
+        console.log("Request Body:", requestBody);
 
         const response = await fetch(
           "https://roi-calculator-ezdxh2cjgvg9fvaz.eastus-01.azurewebsites.net/data",
@@ -76,10 +75,9 @@ export function Results({ formData }: ResultsProps) {
         const responseData = await response.json();
         console.log("API Response:", responseData);
 
-        // Actualizar el estado con los datos procesados
         setCalculatedROI({
           roi: responseData.processed_data.roi_percent || 0,
-          paybackPeriod: formData.duration_months || 0, // Puedes calcularlo si es necesario
+          paybackPeriod: formData.duration_months || 0,
           npv: responseData.processed_data.employee_demotion_percent || 0,
           totalCosts:
             Number(formData.budget) +
@@ -131,73 +129,132 @@ export function Results({ formData }: ResultsProps) {
         <div className="grid grid-cols-3 md:grid-cols-1 gap-6">
           <Card>
             <CardContent className="space-y-6">
-                <div className="grid grid-cols-3 md:grid-cols-3 gap-6">
-                <Card className="flex flex-col h-full bg-gradient-to-bl from-white via-gray-100 to-white dark:from-blue-600 dark:via-zinc-950 dark:to-black shadow-lg backdrop-blur-sm">
-                  <CardHeader className="pb-2">
-                  <CardTitle className="text-lg flex items-center gap-2">
-                    <PieChart className="w-5 h-5" />
-                    Return of Investment
-                  </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                  <div className="text-3xl font-bold">
-                    {calculatedROI.roi.toFixed(2)}%
-                  </div>
-                  </CardContent>
-                </Card>
-                <Card className="flex flex-col h-full bg-gradient-to-bl from-white via-gray-100 to-white dark:from-blue-600 dark:via-zinc-950 dark:to-black shadow-lg backdrop-blur-sm">
-                  <CardHeader className="pb-2">
-                  <CardTitle className="text-lg flex items-center gap-2">
-                    <Send className="w-5 h-5" />
-                    Success Probability
-                  </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                  <div className="text-3xl font-bold">
-                    {calculatedROI.successProbability.toFixed(2)}%
-                  </div>
-                  </CardContent>
-                </Card>
-                <Card className="flex flex-col h-full bg-gradient-to-bl from-white via-gray-100 to-white dark:from-blue-600 dark:via-zinc-950 dark:to-black shadow-lg backdrop-blur-sm">
-                  <CardHeader className="pb-2">
-                  <CardTitle className="text-lg flex items-center gap-2">
-                    <Download className="w-5 h-5" />
-                    Employee Demotion Risk
-                  </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                  <div className="text-3xl font-bold">
-                    {(calculatedROI.npv * 100).toFixed(2)}%
-                  </div>
-                  </CardContent>
-                </Card>
-                <Card className="flex flex-col h-full bg-gradient-to-bl from-white via-gray-100 to-white dark:from-blue-600 dark:via-zinc-950 dark:to-black shadow-lg backdrop-blur-sm">
-                  <CardHeader className="pb-2">
-                  <CardTitle className="text-lg flex items-center gap-2">
-                    <PieChart className="w-5 h-5" />
-                    Total Costs
-                  </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                  <div className="text-3xl font-bold">
-                    ${calculatedROI.totalCosts.toLocaleString()}
-                  </div>
-                  </CardContent>
-                </Card>
-                <Card className="flex flex-col h-full bg-gradient-to-bl from-white via-gray-100 to-white dark:from-blue-600 dark:via-zinc-950 dark:to-black shadow-lg backdrop-blur-sm">
-                  <CardHeader className="pb-2">
-                  <CardTitle className="text-lg flex items-center gap-2">
-                    <PieChart className="w-5 h-5" />
-                    Total Benefits
-                  </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                  <div className="text-3xl font-bold">
-                    ${calculatedROI.totalBenefits.toLocaleString()}
-                  </div>
-                  </CardContent>
-                </Card>
-                </div>
+          <div className="grid grid-cols-3 md:grid-cols-3 gap-6">
+          <Card
+            className={`flex flex-col h-full bg-gradient-to-bl from-white via-gray-100 to-white ${
+            calculatedROI.roi > 30
+              ? "dark:from-green-600"
+              : calculatedROI.roi > 20
+              ? "dark:from-yellow-600"
+              : calculatedROI.roi > 10
+              ? "dark:from-orange-600"
+              : "dark:from-red-600"
+            } dark:via-zinc-950 dark:to-black shadow-lg backdrop-blur-sm`}
+          >
+            <CardHeader className="pb-2">
+            <CardTitle className="text-lg flex items-center gap-2">
+              <PieChart className="w-5 h-5" />
+              Return of Investment
+            </CardTitle>
+            </CardHeader>
+            <CardContent>
+            <div className="text-3xl font-bold">
+              {calculatedROI.roi.toFixed(2)}%
+            </div>
+            <div className="text-sm mt-2">
+              {calculatedROI.roi > 35
+              ? "Excelente "
+              : calculatedROI.roi > 20
+              ? "Bueno / Competitivo "
+              : calculatedROI.roi > 10
+              ? "Aceptable / Justo "
+              : "Bajo / Riesgoso"}
+            </div>
+            </CardContent>
+          </Card>
+          <Card
+            className={`flex flex-col h-full bg-gradient-to-bl from-white via-gray-100 to-white ${
+            calculatedROI.successProbability > 70
+              ? "dark:from-green-600"
+              : calculatedROI.successProbability > 50
+              ? "dark:from-yellow-600"
+              : calculatedROI.successProbability > 30
+              ? "dark:from-orange-600"
+              : "dark:from-red-600"
+            } dark:via-zinc-950 dark:to-black shadow-lg backdrop-blur-sm`}
+          >
+            <CardHeader className="pb-2">
+            <CardTitle className="text-lg flex items-center gap-2">
+              <Send className="w-5 h-5" />
+              Success Probability
+            </CardTitle>
+            </CardHeader>
+            <CardContent>
+            <div className="text-3xl font-bold">
+              {calculatedROI.successProbability.toFixed(2)}%
+            </div>
+            </CardContent>
+          </Card>
+          <Card
+            className={`flex flex-col h-full bg-gradient-to-bl from-white via-gray-100 to-white ${
+            calculatedROI.npv > 0.7
+              ? "dark:from-green-600"
+              : calculatedROI.npv > 0.5
+              ? "dark:from-yellow-600"
+              : calculatedROI.npv > 0.3
+              ? "dark:from-orange-600"
+              : "dark:from-red-600"
+            } dark:via-zinc-950 dark:to-black shadow-lg backdrop-blur-sm`}
+          >
+            <CardHeader className="pb-2">
+            <CardTitle className="text-lg flex items-center gap-2">
+              <Download className="w-5 h-5" />
+              Employee Demotion Risk
+            </CardTitle>
+            </CardHeader>
+            <CardContent>
+            <div className="text-3xl font-bold">
+              {(calculatedROI.npv * 100).toFixed(2)}%
+            </div>
+            </CardContent>
+          </Card>
+          <Card
+            className={`flex flex-col h-full bg-gradient-to-bl from-white via-gray-100 to-white ${
+            calculatedROI.totalCosts < 50000
+              ? "dark:from-green-600"
+              : calculatedROI.totalCosts < 100000
+              ? "dark:from-yellow-600"
+              : calculatedROI.totalCosts < 200000
+              ? "dark:from-orange-600"
+              : "dark:from-red-600"
+            } dark:via-zinc-950 dark:to-black shadow-lg backdrop-blur-sm`}
+          >
+            <CardHeader className="pb-2">
+            <CardTitle className="text-lg flex items-center gap-2">
+              <PieChart className="w-5 h-5" />
+              Total Costs
+            </CardTitle>
+            </CardHeader>
+            <CardContent>
+            <div className="text-3xl font-bold">
+              ${calculatedROI.totalCosts.toLocaleString()}
+            </div>
+            </CardContent>
+          </Card>
+          <Card
+            className={`flex flex-col h-full bg-gradient-to-bl from-white via-gray-100 to-white ${
+            calculatedROI.totalBenefits > 200000
+              ? "dark:from-green-600"
+              : calculatedROI.totalBenefits > 100000
+              ? "dark:from-yellow-600"
+              : calculatedROI.totalBenefits > 50000
+              ? "dark:from-orange-600"
+              : "dark:from-red-600"
+            } dark:via-zinc-950 dark:to-black shadow-lg backdrop-blur-sm`}
+          >
+            <CardHeader className="pb-2">
+            <CardTitle className="text-lg flex items-center gap-2">
+              <PieChart className="w-5 h-5" />
+              Total Benefits
+            </CardTitle>
+            </CardHeader>
+            <CardContent>
+            <div className="text-3xl font-bold">
+              ${calculatedROI.totalBenefits.toLocaleString()}
+            </div>
+            </CardContent>
+          </Card>
+          </div>
 
               <Tabs
                 defaultValue="recommendation"
