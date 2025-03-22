@@ -127,7 +127,7 @@ This architecture represents the **ROI Calculator** application deployed in **Az
 
 ## Architecture Diagram
 
-![Azure Architecture](doc/arquitectura_azure.png)
+![Azure Architecture](doc/arquitecturaazure.png)
 
 ## Components
 
