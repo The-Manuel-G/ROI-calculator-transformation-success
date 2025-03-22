@@ -117,6 +117,57 @@ roi-calculator/
 ![Imagen 6](doc/6.png)
 ![Imagen 7](doc/7.png)
 
+---
+
+# Azure Architecture for ROI Calculator
+
+## Overview
+
+This architecture represents the **ROI Calculator** application deployed in **Azure**, integrating multiple services including **App Service, Machine Learning Workspace, Storage Accounts, and Key Vaults**.
+
+## Architecture Diagram
+
+![Azure Architecture](doc/arquitectura_azure.png)
+
+## Components
+
+### 1. **AI & Machine Learning Services**
+   - **analizadores-gpt**: Azure AI service for text analysis.
+   - **equipo2workspace**: Azure Machine Learning Workspace to handle ML experiments and models.
+
+### 2. **Application Monitoring & Insights**
+   - **Application Insights Smart D...**: A monitoring tool for tracking application performance.
+   - **equipo2workspa0868321380**: Application Insights instance for tracking logs.
+   - **equipo2workspa0452963102**: Log Analytics workspace for storing logs.
+
+### 3. **Security & Key Management**
+   - **miappdevkv**: Key Vault for securely storing secrets and credentials.
+   - **equipo22410257976**: Another Key Vault for encryption keys.
+   - **roi-calculator-id-9111** & **roi-calculator-id-ba56**: Managed identities for authentication.
+
+### 4. **Storage Accounts**
+   - **equipo28026829374**: Primary storage account for application data.
+   - **equipo2workspa5367332377**: Additional storage linked to ML workspace.
+   - **equipo286bc2** & **roistoragehack**: Extra storage solutions.
+
+### 5. **Application Deployment**
+   - **roi-calculator**: Main App Service where the ROI Calculator is hosted.
+   - **ASP-equipo2-8514**: The App Service Plan providing computing resources.
+
+## Deployment Methodology
+
+1. **Infrastructure as Code (IaC)**: Deployed using ARM templates or Terraform.
+2. **CI/CD Integration**: Uses **Azure DevOps Pipelines** for automated deployment.
+3. **Security Best Practices**:
+   - Secrets stored in **Azure Key Vault**.
+   - Role-based access control (RBAC) implemented for all resources.
+4. **Monitoring & Logging**:
+   - **Application Insights** for performance tracking.
+   - **Log Analytics** for detailed logs.
+
+---
+
+This architecture ensures **scalability, security, and high availability** for the ROI Calculator application.
 
 ## 📚 Learn More
 
