@@ -233,11 +233,11 @@ export function Results({ formData }: ResultsProps) {
           </Card>
           <Card
             className={`flex flex-col h-full bg-gradient-to-bl from-white via-gray-100 to-white ${
-            calculatedROI.totalBenefits > 200000
+            calculatedROI.totalBenefits >= 200000
               ? "dark:from-green-600"
-              : calculatedROI.totalBenefits > 100000
+              : calculatedROI.totalBenefits >= 100000
               ? "dark:from-yellow-600"
-              : calculatedROI.totalBenefits > 50000
+              : calculatedROI.totalBenefits >= 50000
               ? "dark:from-orange-600"
               : "dark:from-red-600"
             } dark:via-zinc-950 dark:to-black shadow-lg backdrop-blur-sm`}
