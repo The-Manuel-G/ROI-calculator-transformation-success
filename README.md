@@ -13,24 +13,6 @@ Welcome to the **ROI Calculator** project! This application is designed to help 
 - **Cloud Integration**: Supports Azure Blob Storage for secure file management.
 
 ---
-
-## 🛠️ Technologies Used
-
-### Frontend
-- **[Next.js](https://nextjs.org)**: A React framework for building fast and scalable web applications.
-- **TypeScript**: Ensures type safety and better developer experience.
-- **Geist Font**: Optimized font loading for a clean and modern UI.
-
-### Backend
-- **[Flask](https://flask.palletsprojects.com)**: A lightweight Python web framework for API development.
-- **Azure Functions**: Serverless computing for handling CSV file operations.
-- **Python**: Core language for backend logic and calculations.
-
-### Cloud
-- **Azure Blob Storage**: Secure and scalable storage for CSV files.
-
----
-
 ## 📊 How It Works
 
 1. **Input Data**: Users provide project details such as budget, employee count, and training costs.
