@@ -107,6 +107,17 @@ roi-calculator/
 
 ---
 
+### Configuración y Uso
+
+![Imagen 1](doc/1.png)
+![Imagen 2](doc/2.png)
+![Imagen 3](doc/3.png)
+![Imagen 4](doc/4.png)
+![Imagen 5](doc/5.png)
+![Imagen 6](doc/6.png)
+![Imagen 7](doc/7.png)
+
+
 ## 📚 Learn More
 
 - [Next.js Documentation](https://nextjs.org/docs)
