@@ -115,7 +115,7 @@ export default function CalculatorProduction() {
   return (
     <div className="container mx-auto px-4 max-w-full">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight mb-4">AI ROI Calculator</h1>
+        <h1 className="text-3xl font-bold tracking-tight mb-4">Input your project details</h1>
         <div className="flex flex-col sm:flex-row sm:items-center gap-4">
           <div className="flex-1">
             <Progress value={progress} className="h-2" />
